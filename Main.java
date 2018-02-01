@@ -7,7 +7,6 @@ public class Main {
         String server = "turing.cs.missouriwestern.edu";
         String user = "csc346";
         String password = "age126";
-
         String connectionString = String.format("jdbc:mysql://%s/%s?user=%s&password=%s", server,
                 database, user, password);
         System.out.println("The connection string is " + connectionString);
