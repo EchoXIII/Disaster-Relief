@@ -4,9 +4,7 @@
 public class maxDist {
     double maxLat;
 
-    public double getMaxLat() {
-        return maxLat;
-    }
+    public double getMaxLat() { return maxLat; }
 
     public double getMinLat() {
         return minLat;
@@ -29,20 +27,26 @@ public class maxDist {
         lon = Math.toRadians(lon);
         double bearing = Math.toRadians(0);
         double angleDist = dist/R;
-        double latNorth = Math.asin(Math.sin(lat))*Math.cos(angleDist)+Math.cos(lat)*Math.sin(angleDist)*Math.cos(bearing);
+        double latNorth = Math.asin((Math.sin(lat))*Math.cos(angleDist)+Math.cos(lat)*Math.sin(angleDist)*Math.cos(bearing));
         bearing = Math.toRadians(90);
-        double latEast = Math.asin(Math.sin(lat))*Math.cos(angleDist)+Math.cos(lat)*Math.sin(angleDist)*Math.cos(bearing);
+        double latEast = Math.asin((Math.sin(lat))*Math.cos(angleDist)+Math.cos(lat)*Math.sin(angleDist)*Math.cos(bearing));
         double lonEast =  lon+Math.atan2(Math.sin(bearing)*Math.sin(angleDist)*Math.cos(lat),
                 Math.cos(angleDist)-Math.sin(lat)*Math.sin(latEast));
         bearing = Math.toRadians(180);
-        double latSouth = Math.asin(Math.sin(lat))*Math.cos(angleDist)+Math.cos(lat)*Math.sin(angleDist)*Math.cos(bearing);
+        double latSouth = Math.asin((Math.sin(lat))*Math.cos(angleDist)+Math.cos(lat)*Math.sin(angleDist)*Math.cos(bearing));
         bearing = Math.toRadians(270);
-        double latWest = Math.asin(Math.sin(lat))*Math.cos(angleDist)+Math.cos(lat)*Math.sin(angleDist)*Math.cos(bearing);
+        double latWest = Math.asin((Math.sin(lat))*Math.cos(angleDist)+Math.cos(lat)*Math.sin(angleDist)*Math.cos(bearing));
         double lonWest =  lon+Math.atan2(Math.sin(bearing)*Math.sin(angleDist)*Math.cos(lat),
                 Math.cos(angleDist)-Math.sin(lat)*Math.sin(latWest));
-        this.maxLat = latNorth;
-        this.minLat = latSouth;
-        this.maxLon = lonWest;
-        this.minLon = lonEast;
+        this.maxLat = Math.toDegrees(latNorth);
+        this.minLat = Math.toDegrees(latSouth);
+        this.maxLon = Math.toDegrees(lonWest);
+        this.minLon = Math.toDegrees(lonEast);
+    }
+
+    @Override
+    public String toString() {
+        String s = maxLat + " " + minLat + " " + maxLon + " " + minLon;
+        return s;
     }
 }
