@@ -58,11 +58,13 @@ public class Main {
                 int houses = rs2.getInt("taxreturnsfiled");
                 inZone = new Location (city,state,zipcode,lat,lon,pop,houses);
                 boolean unique = true;
-                for (int i = 0; i<list.size(); i++){
-                    if (inZone.city.equals(list.get(i).city)&& inZone.state.equals(list.get(i).state)){
-                        int x = inZone.pop + list.get(i).pop;
-                        list.get(i).setPop(x);
-                        unique = false;
+                if (toMiles(Haversine.haversine(epicenter.getLat(),epicenter.getLon(),inZone.getLat(),inZone.getLon()))<= radius) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (inZone.city.equals(list.get(i).city) && inZone.state.equals(list.get(i).state)) {
+                            int x = inZone.pop + list.get(i).pop;
+                            list.get(i).setPop(x);
+                            unique = false;
+                        }
                     }
                 }
                 if (unique) {
